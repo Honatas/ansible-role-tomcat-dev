@@ -1,0 +1,82 @@
+---
+- name: Donwload Apache Tomcat
+  get_url:
+    url: "{{tomcat_download_url}}"
+    dest: "{{tomcat_install_dir}}"
+
+- name: Unpack Tomcat
+  unarchive:
+    src: "{{tomcat_install_dir}}/{{tomcat_download_url | basename}}"
+    dest: "{{tomcat_install_dir}}"
+
+- name: Create manager credentials
+  blockinfile:
+    dest: "{{catalina_home}}/conf/tomcat-users.xml"
+    insertbefore: </tomcat-users>
+    block: |
+      <role rolename="manager-gui"/>
+      <user username="admin" password="admin" roles="manager-gui"/>
+
+- name: Create Catalina/localhost folder
+  file:
+    dest: "{{item}}"
+    state: directory
+    mode: '775'
+    owner: "{{tomcat_linux_user}}"
+    group: "{{tomcat_linux_user}}"
+  with_items:
+    - "{{catalina_home}}/conf/Catalina"
+    - "{{catalina_home}}/conf/Catalina/localhost"
+
+- name: Allow remote access
+  copy:
+    dest: "{{catalina_home}}/conf/Catalina/localhost/manager.xml"
+    content: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Context privileged="true" antiResourceLocking="false" docBase="${catalina.home}/webapps/manager">
+          <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="^.*$" />
+      </Context>
+
+- name: Create Tomcat Service
+  become: yes
+  copy:
+    dest: /lib/systemd/system/tomcat.service
+    content: |
+      [Unit]
+      Description=Tomcat Service
+      After=syslog.target network.target
+
+      [Service]
+      Type=forking
+
+      Environment=CATALINA_PID={{catalina_home}}/temp/tomcat.pid
+      Environment=CATALINA_HOME={{catalina_home}}
+      Environment=CATALINA_BASE={{catalina_home}}
+      Environment=JPDA_ADDRESS=0.0.0.0:8088
+
+      ExecStart={{catalina_home}}/bin/catalina.sh jpda start
+      ExecStop=/bin/kill -15 $MAINPID
+
+      User={{tomcat_linux_user}}
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Activate tomcat.service
+  become: yes
+  shell: |
+    systemctl daemon-reload
+    systemctl enable tomcat
+
+- name: Start Tomcat
+  become: yes
+  service:
+    name: tomcat
+    enabled: yes
+    state: started
+
+- name: Set Environment Variables
+  lineinfile:
+    dest: "/home/{{tomcat_linux_user}}/.profile"
+    line:
+      export CATALINA_HOME={{catalina_home}}
