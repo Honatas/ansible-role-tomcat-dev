@@ -17,4 +17,4 @@ galaxy_info:
     - vagrant
 
 dependencies:
-  - { role: Honatas.openjdk-ppa, when: tomcat_install_java == true }
+  - { role: honatas.openjdk-ppa, when: tomcat_install_java == true }
