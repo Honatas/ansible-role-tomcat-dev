@@ -62,21 +62,9 @@
       [Install]
       WantedBy=multi-user.target
 
-- name: Activate tomcat.service
-  become: yes
-  shell: |
-    systemctl daemon-reload
-    systemctl enable tomcat
-
 - name: Start Tomcat
   become: yes
   service:
     name: tomcat
     enabled: yes
     state: started
-
-- name: Set Environment Variables
-  lineinfile:
-    dest: "/home/{{ tomcat_linux_user }}/.profile"
-    line:
-      export CATALINA_HOME={{ catalina_home }}
