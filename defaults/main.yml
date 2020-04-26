@@ -1,6 +1,5 @@
 ---
 tomcat_version: 9.0.20
-tomcat_install_java: true
 tomcat_linux_user: vagrant
 
 tomcat_download_url: "https://archive.apache.org/dist/tomcat/tomcat-{{ tomcat_version.split('.')[0] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
