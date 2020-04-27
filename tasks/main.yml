@@ -15,7 +15,7 @@
     insertbefore: </tomcat-users>
     block: |
       <role rolename="manager-gui"/>
-      <user username="admin" password="admin" roles="manager-gui"/>
+      <user username="{{ tomcat_manager_gui_username }}" password="{{ tomcat_manager_gui_password }}" roles="manager-gui"/>
 
 - name: Create Catalina/localhost folder
   file:

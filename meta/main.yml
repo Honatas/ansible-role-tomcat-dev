@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: tomcat-dev
   author: Jonatas de Moraes Junior
-  description: Ansible role for installing Apache Tomcat on a development environment. Suited for vagrant ubuntu boxes.
+  description: Ansible role for installing Apache Tomcat with the Manager GUI enabled.
   license: MIT
 
   min_ansible_version: 2.9
@@ -14,6 +14,7 @@ galaxy_info:
   galaxy_tags:
     - tomcat
     - development
-    - vagrant
+    - manager
+    - gui
 
 dependencies: []

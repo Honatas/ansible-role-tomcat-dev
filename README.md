@@ -1,39 +1,73 @@
-=======
-Tomcat Dev
-=========
+Apache Tomcat with Manager GUI
+==============================
 
-Ansible role for installing Apache Tomcat on a development environment. Suited for vagrant ubuntu boxes.
+[![Travis](https://img.shields.io/travis/honatas/ansible-role-tomcat-dev?style=plastic)](https://travis-ci.org/Honatas/ansible-role-tomcat-dev "View the build status on Travis")
+
+Ansible role for installing Apache Tomcat as a systemd service with the Manager GUI enabled. Remote access to the GUI is allowed, so this role is not recommended for production environments.
+
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Tomcat needs a Java installation in order to run. Since there are a number of ways to do it, this was not added as a dependency to this role, so you have more freedom of choice. Therefore, you must ensure you have Java installed prior to running this role. If you allow me, I can suggest the [openjdk-ppa](https://galaxy.ansible.com/honatas/openjdk_ppa) role for that purpose.
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+**tomcat_version**: The version you want installed.  
+default: 9.0.34  
+
+**tomcat_linux_user**: The system username under which Tomcat will run.  
+default: vagrant
+
+**tomcat_install_dir**: Installation folder.  
+default: /home/{{ tomcat_linux_user }}  (which translates to /home/vagrant)  
+
+**tomcat_manager_gui_username**: Username of the Manager GUI  
+default: admin  
+
+**tomcat_manager_gui_password**: Password of the Manager GUI  
+default: admin  
+
+
+Example Playbooks
+-----------------
+
+Default installation
+```yaml
+roles:
+  - honatas.tomcat_dev
+```
+
+With Java
+```yaml
+roles:
+  - honatas.openjdk_ppa
+  - honatas.tomcat_dev
+```
+
+Another version
+```yaml
+roles:
+  - { role: honatas.tomcat_dev, tomcat_version: 9.0.20 }
+```
+
+Another user and a different folder (make sure the folder is created and the user has permission)
+```yaml
+roles:
+  - role: honatas.tomcat_dev
+    tomcat_linux_user: myuser
+    tomcat_install_dir: /opt
+```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
 
 License
 -------
 
 MIT
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
