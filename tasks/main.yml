@@ -9,6 +9,7 @@
     src: "{{ tomcat_install_dir }}/{{ tomcat_download_url | basename }}"
     dest: "{{ tomcat_install_dir }}"
     owner: "{{ tomcat_linux_user }}"
+    group: "{{ tomcat_linux_group }}"
 
 - name: Create manager credentials
   blockinfile:
@@ -24,7 +25,7 @@
     state: directory
     mode: '775'
     owner: "{{ tomcat_linux_user }}"
-    group: "{{ tomcat_linux_user }}"
+    group: "{{ tomcat_linux_group }}"
   with_items:
     - "{{ catalina_home }}/conf/Catalina"
     - "{{ catalina_home }}/conf/Catalina/localhost"

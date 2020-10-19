@@ -1,6 +1,7 @@
 ---
 tomcat_version: 9.0.34
 tomcat_linux_user: vagrant
+tomcat_linux_group: vagrant
 tomcat_install_dir: "/home/{{ tomcat_linux_user }}"
 tomcat_manager_gui_username: admin
 tomcat_manager_gui_password: admin
