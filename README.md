@@ -20,7 +20,7 @@ Role Variables
 **tomcat_version**: The version you want installed.  
 default: 9.0.34  
 
-**tomcat_linux_user**: The system username under which Tomcat will run.  
+**tomcat_linux_user**: The username under which Tomcat will run.  
 default: vagrant
 
 **tomcat_install_dir**: Installation folder.  

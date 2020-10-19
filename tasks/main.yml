@@ -8,7 +8,7 @@
   unarchive:
     src: "{{ tomcat_install_dir }}/{{ tomcat_download_url | basename }}"
     dest: "{{ tomcat_install_dir }}"
-    owner: "{{ ansible_user }}"
+    owner: "{{ tomcat_linux_user }}"
 
 - name: Create manager credentials
   blockinfile:
