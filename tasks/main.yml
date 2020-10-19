@@ -8,6 +8,7 @@
   unarchive:
     src: "{{ tomcat_install_dir }}/{{ tomcat_download_url | basename }}"
     dest: "{{ tomcat_install_dir }}"
+    owner: "{{ ansible_user }}"
 
 - name: Create manager credentials
   blockinfile:
@@ -38,7 +39,6 @@
       </Context>
 
 - name: Create Tomcat Service
-  become: yes
   copy:
     dest: /lib/systemd/system/tomcat.service
     content: |
@@ -63,7 +63,6 @@
       WantedBy=multi-user.target
 
 - name: Start Tomcat
-  become: yes
   service:
     name: tomcat
     enabled: yes

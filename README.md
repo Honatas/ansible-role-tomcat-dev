@@ -2,6 +2,8 @@ Apache Tomcat with Manager GUI
 ==============================
 
 [![Travis](https://img.shields.io/travis/honatas/ansible-role-tomcat-dev?style=plastic)](https://travis-ci.org/Honatas/ansible-role-tomcat-dev "View the build status on Travis")
+[![coffee](https://img.shields.io/badge/buy%20me%20a-coffee-orange?style=plastic)](https://ko-fi.com/honatas "Buy me a coffee")
+
 
 Ansible role for installing Apache Tomcat as a systemd service with the Manager GUI enabled. Remote access to the GUI is allowed, so this role is not recommended for production environments.
 
