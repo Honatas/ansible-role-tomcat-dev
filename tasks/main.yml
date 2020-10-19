@@ -8,8 +8,13 @@
   unarchive:
     src: "{{ tomcat_install_dir }}/{{ tomcat_download_url | basename }}"
     dest: "{{ tomcat_install_dir }}"
+
+- name: Take ownership of Tomcat folder
+  file:
+    path: "{{ catalina_home }}"
     owner: "{{ tomcat_linux_user }}"
     group: "{{ tomcat_linux_group }}"
+    recurse: yes
 
 - name: Create manager credentials
   blockinfile:
