@@ -1,8 +1,10 @@
 Apache Tomcat with Manager GUI
 ==============================
 
+[![GitHub](https://img.shields.io/github/license/honatas/ansible-role-tomcat-dev?style=plastic)](https://github.com/Honatas/ansible-role-tomcat-dev/blob/master/LICENSE)
 [![Travis](https://img.shields.io/travis/honatas/ansible-role-tomcat-dev?style=plastic)](https://travis-ci.org/Honatas/ansible-role-tomcat-dev "View the build status on Travis")
-[![coffee](https://img.shields.io/badge/buy%20me%20a-coffee-orange?style=plastic)](https://ko-fi.com/honatas "Buy me a coffee")
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/48189?style=plastic)](https://galaxy.ansible.com/honatas/tomcat_dev)
+[![coffee](https://img.shields.io/badge/buy%20me%20a-coffee-brown?style=plastic)](https://ko-fi.com/honatas "Buy me a coffee")
 
 
 Ansible role for installing Apache Tomcat as a systemd service with the Manager GUI enabled. Remote access to the GUI is allowed, so this role is not recommended for production environments.
@@ -73,3 +75,11 @@ License
 -------
 
 MIT
+
+
+Contributions
+-------------
+
+Feel free to open an issue or add a pull request. Anytime. Really, I mean it.  
+
+Also, if you like my work, I'll let you know that I love [coffee](https://ko-fi.com/honatas).  
